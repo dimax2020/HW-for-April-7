@@ -37,13 +37,13 @@ func answer(w http.ResponseWriter, r *http.Request) {
 		if pwd[indexer.Login] == indexer.Password {
 			// Вошел по логину и паролю
 			tok := time.Now()
-			resp, _ := json.Marshal("Ваш новый токен: " + tok.String() + " | Ваш рефрешь токен: " + tok.String())
+			resp, _ := json.Marshal("Ваш новый токен: " + tok.String() + " | Ваш рефреш токен: " + tok.String())
 			_, _ = w.Write(resp)
 			// Записываем время на этого человека
 			tokens[tok.String()] = tok
 			refreshToken[tok.String()] = tok.String()
 			timeLifeRefresh[tok.String()] = tok
-			fmt.Println("Новый токен: " + tok.String() + " | Рефрешь токен:" + tok.String())
+			fmt.Println("Новый токен: " + tok.String() + " | Рефреш токен:" + tok.String())
 		}
 	} else if indexer.Token != "" {
 		if (time.Now()).Sub(tokens[indexer.Token]) <= time.Minute {
@@ -61,7 +61,7 @@ func answer(w http.ResponseWriter, r *http.Request) {
 					_, _ = w.Write([]byte("Новый токен:" + tok.String()))
 				}
 			} else {
-					_, _ = w.Write([]byte("Рефрешь токен закончился"))
+					_, _ = w.Write([]byte("Рефреш токен закончился"))
 			}
 			
 		}
